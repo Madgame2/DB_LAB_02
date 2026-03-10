@@ -1,3 +1,4 @@
+
 IF NOT EXISTS (
 	SELECT NAME from sys.databases where name = 'ForeignWorld_DB'
 ) BEGIN
@@ -13,31 +14,31 @@ go
 -- ENUMS
 IF OBJECT_ID('EventTypes', 'U') IS NULL
 CREATE TABLE EventTypes (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     type NVARCHAR(125) NOT NULL
 );
 
 IF OBJECT_ID('HomeworkExecutionStatuses', 'U') IS NULL
 CREATE TABLE HomeworkExecutionStatuses (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     type NVARCHAR(125) NOT NULL
 );
 
 IF OBJECT_ID('HomeworkStatuses', 'U') IS NULL
 CREATE TABLE HomeworkStatuses (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     status NVARCHAR(125) NOT NULL
 );
 
 IF OBJECT_ID('HomeworkTypes', 'U') IS NULL
 CREATE TABLE HomeworkTypes (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     type NVARCHAR(125) NOT NULL
 );
 
 IF OBJECT_ID('CurseStatuses', 'U') IS NULL
 CREATE TABLE CurseStatuses (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     status NVARCHAR(125) NOT NULL
 );
 
@@ -45,7 +46,7 @@ CREATE TABLE CurseStatuses (
 -- MAIN
 IF OBJECT_ID('Users', 'U') IS NULL
 CREATE TABLE Users(
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     first_name NVARCHAR(125) NOT NULL,
     surname NVARCHAR(125) NOT NULL,
     father_name NVARCHAR(125),
@@ -55,12 +56,12 @@ CREATE TABLE Users(
     avatarURI NVARCHAR(512),
     bio NVARCHAR(2000),
     role INT NOT NULL,
-    isDeleted BIT
+    isDeleted BIT DEFAULT 0
 );
 
 IF OBJECT_ID('Courses', 'U') IS NULL
 CREATE TABLE Courses(
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     Status INT NOT NULL,
     curseName NVARCHAR(256) NOT NULL,
     description NVARCHAR(2000),
@@ -75,7 +76,7 @@ CREATE TABLE Courses(
 
 IF OBJECT_ID('Schedule', 'U') IS NULL
 CREATE TABLE Schedule(
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     eventType INT NOT NULL,
     curseID INT NOT NULL,
     date DATE NOT NULL,
@@ -92,7 +93,7 @@ CREATE TABLE Schedule(
 
 IF OBJECT_ID('Homework', 'U') IS NULL
 CREATE TABLE Homework(
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     Tittle NVARCHAR(256) NOT NULL,
     description NVARCHAR(2000),
     type INT NOT NULL,
@@ -116,7 +117,7 @@ CREATE TABLE Homework(
 
 IF OBJECT_ID('Languages', 'U') IS NULL
 CREATE TABLE Languages(
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     Lang NVARCHAR(256) NOT NULL,
     LangCode NVARCHAR(5) NOT NULL
 );
@@ -149,6 +150,7 @@ CREATE TABLE StydentComplition(
     TaskID INT NOT NULL,
     Status INT NOT NULL,
     Mark INT,
+    StudentWork NVARCHAR(2000),
     Message NVARCHAR(2000),
 
     CONSTRAINT PK_StydentComplition
